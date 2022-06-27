@@ -1,6 +1,17 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const getFileContent = (filename) => {
+  const filePath = path.resolve(__dirname, '..', '__fixtures__', filename);
+  const content = fs.readFileSync(filePath, 'utf-8');
+
+  return content;
+};
 
 const findDiff = (obj1, obj2) => {
   const keys = _.sortBy(Object.keys({ ...obj1, ...obj2 }));
@@ -42,11 +53,11 @@ const findDiff = (obj1, obj2) => {
 };
 
 export default (filepath1, filepath2) => {
-  const path1 = path.resolve(process.cwd(), filepath1);
-  const path2 = path.resolve(process.cwd(), filepath2);
+  const test1 = getFileContent(filepath1);
+  const test2 = getFileContent(filepath2);
 
-  const data1 = JSON.parse(fs.readFileSync(path1, { encoding: 'utf8' }));
-  const data2 = JSON.parse(fs.readFileSync(path2, { encoding: 'utf8' }));
+  const data1 = JSON.parse(test1, { encoding: 'utf8' });
+  const data2 = JSON.parse(test2, { encoding: 'utf8' });
 
   const diff = findDiff(data1, data2);
 
@@ -65,13 +76,13 @@ export default (filepath1, filepath2) => {
         result.push(`+ ${prop.name}: ${prop.value2}`);
         break;
       case 'unchanged':
-        result.push(`  ${prop.name}: ${prop.value}`);
+        result.push(`${prop.name}: ${prop.value}`);
         break;
       default:
         throw new Error(`Unknown type: '${prop.status}'`);
     }
   });
 
-  const makeStr = `{\n ${result.join('\n ')}\n}`;
+  const makeStr = `{\n  ${result.join('\n  ')}\n}`;
   return makeStr;
 };
