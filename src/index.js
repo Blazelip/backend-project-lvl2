@@ -2,9 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 import { fileURLToPath } from 'url';
+import parser from './parser.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const getFileType = (filepath) => path.extname(filepath).slice(1);
 
 const getFileContent = (filename) => {
   const filePath = path.resolve(__dirname, '..', '__fixtures__', filename);
@@ -53,11 +56,14 @@ const findDiff = (obj1, obj2) => {
 };
 
 export default (filepath1, filepath2) => {
-  const test1 = getFileContent(filepath1);
-  const test2 = getFileContent(filepath2);
+  const content1 = getFileContent(filepath1);
+  const content2 = getFileContent(filepath2);
 
-  const data1 = JSON.parse(test1, { encoding: 'utf8' });
-  const data2 = JSON.parse(test2, { encoding: 'utf8' });
+  const extension1 = getFileType(filepath1);
+  const extension2 = getFileType(filepath2);
+
+  const data1 = parser(extension1, content1);
+  const data2 = parser(extension2, content2);
 
   const diff = findDiff(data1, data2);
 
@@ -76,7 +82,7 @@ export default (filepath1, filepath2) => {
         result.push(`+ ${prop.name}: ${prop.value2}`);
         break;
       case 'unchanged':
-        result.push(`${prop.name}: ${prop.value}`);
+        result.push(`  ${prop.name}: ${prop.value}`);
         break;
       default:
         throw new Error(`Unknown type: '${prop.status}'`);
