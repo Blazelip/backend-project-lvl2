@@ -1,5 +1,10 @@
 {
   "timeout": 20,
   "verbose": true,
-  "host": "hexlet.io"
+  "host": "hexlet.io",
+  "object": {
+    "height": 178,
+    "weight": 78,
+    "eyes": "green"
+  }
 }

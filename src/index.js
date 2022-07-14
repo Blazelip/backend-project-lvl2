@@ -36,6 +36,14 @@ const findDiff = (obj1, obj2) => {
       };
     }
 
+    if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
+      return {
+        name: key,
+        value: findDiff(obj1[key], obj2[key]),
+        status: 'nested',
+      };
+    }
+
     if (obj1[key] !== obj2[key]) {
       return {
         name: key,
@@ -55,6 +63,37 @@ const findDiff = (obj1, obj2) => {
   return result;
 };
 
+const stylish = (tree, space = '*', spacesCount = 2) => {
+  // console.log('CURRENT TREE', tree);
+
+  const iter = (node, depth) => {
+    // console.log('CURRENT NODE', node);
+
+    const indentSize = depth * spacesCount;
+    const currentIndent = space.repeat(indentSize);
+
+    const result = node.flatMap((item) => {
+      switch (item.status) {
+        case 'deleted':
+          return `${currentIndent}- ${item.name}: ${item.value}`;
+        case 'added':
+          return `${currentIndent}+ ${item.name}: ${item.value}`;
+        case 'nested':
+          return `${currentIndent}  ${item.name}: ${iter(item.value, depth + 1)}`;
+        case 'modified':
+          return `${currentIndent}- ${item.name}: ${item.value1}\n${currentIndent}+ ${item.name}: ${item.value2}`;
+        case 'unchanged':
+          return `${currentIndent}  ${item.name}: ${item.value}`;
+        default:
+          throw new Error(`Unknown type: '${item.status}'`);
+      }
+    });
+
+    return `{\n${result.join('\n')}\n${currentIndent}}`;
+  };
+  return iter(tree, 1);
+};
+
 export default (filepath1, filepath2) => {
   const content1 = getFileContent(filepath1);
   const content2 = getFileContent(filepath2);
@@ -67,28 +106,5 @@ export default (filepath1, filepath2) => {
 
   const diff = findDiff(data1, data2);
 
-  const result = [];
-
-  diff.forEach((prop) => {
-    switch (prop.status) {
-      case 'deleted':
-        result.push(`- ${prop.name}: ${prop.value}`);
-        break;
-      case 'added':
-        result.push(`+ ${prop.name}: ${prop.value}`);
-        break;
-      case 'modified':
-        result.push(`- ${prop.name}: ${prop.value1}`);
-        result.push(`+ ${prop.name}: ${prop.value2}`);
-        break;
-      case 'unchanged':
-        result.push(`  ${prop.name}: ${prop.value}`);
-        break;
-      default:
-        throw new Error(`Unknown type: '${prop.status}'`);
-    }
-  });
-
-  const makeStr = `{\n  ${result.join('\n  ')}\n}`;
-  return makeStr;
+  return stylish(diff);
 };
