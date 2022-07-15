@@ -63,35 +63,33 @@ const findDiff = (obj1, obj2) => {
   return result;
 };
 
-const stylish = (tree, space = '*', spacesCount = 2) => {
-  // console.log('CURRENT TREE', tree);
-
+const stylish = (tree, space = '  ', spacesCount = 1) => {
   const iter = (node, depth) => {
-    // console.log('CURRENT NODE', node);
-
     const indentSize = depth * spacesCount;
     const currentIndent = space.repeat(indentSize);
+    const bracketIndent = space.repeat((depth + 1) * spacesCount);
 
-    const result = node.flatMap((item) => {
-      switch (item.status) {
+    const result = node.map((item) => {
+      const { name, status, value } = item;
+      switch (status) {
         case 'deleted':
-          return `${currentIndent}- ${item.name}: ${item.value}`;
+          return `${currentIndent}- ${name}: ${value}`;
         case 'added':
-          return `${currentIndent}+ ${item.name}: ${item.value}`;
+          return `${currentIndent}+ ${name}: ${value}`;
         case 'nested':
-          return `${currentIndent}  ${item.name}: ${iter(item.value, depth + 1)}`;
+          return `${currentIndent}  ${name}: {\n${iter(value, depth + 2)}\n${bracketIndent}}`;
         case 'modified':
-          return `${currentIndent}- ${item.name}: ${item.value1}\n${currentIndent}+ ${item.name}: ${item.value2}`;
+          return `${currentIndent}- ${name}: ${item.value1}\n${currentIndent}+ ${name}: ${item.value2}`;
         case 'unchanged':
-          return `${currentIndent}  ${item.name}: ${item.value}`;
+          return `${currentIndent}  ${name}: ${value}`;
         default:
-          throw new Error(`Unknown type: '${item.status}'`);
+          throw new Error(`Unknown type: '${status}'`);
       }
     });
 
-    return `{\n${result.join('\n')}\n${currentIndent}}`;
+    return result.join('\n');
   };
-  return iter(tree, 1);
+  return `{\n${iter(tree, 1)}\n}`;
 };
 
 export default (filepath1, filepath2) => {
