@@ -16,5 +16,9 @@
 #### Gendiff between 2 YML file
 [![asciicast](https://asciinema.org/a/ueB8UiQP4g1KtQuvnapyO3CI0.svg)](https://asciinema.org/a/ueB8UiQP4g1KtQuvnapyO3CI0)
 
+#### Complicated Gendiff with nested objects
+
+[![asciicast](https://asciinema.org/a/LCV4uBBXhX9pnyzjeJzVh7Vu4.svg)](https://asciinema.org/a/LCV4uBBXhX9pnyzjeJzVh7Vu4)
+
 
 

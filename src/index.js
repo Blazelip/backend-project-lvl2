@@ -3,6 +3,7 @@ import path from 'path';
 import _ from 'lodash';
 import { fileURLToPath } from 'url';
 import parser from './parser.js';
+import formatDiff from './formatters/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,36 +64,7 @@ const findDiff = (obj1, obj2) => {
   return result;
 };
 
-const stylish = (tree, space = '  ', spacesCount = 1) => {
-  const iter = (node, depth) => {
-    const indentSize = depth * spacesCount;
-    const currentIndent = space.repeat(indentSize);
-    const bracketIndent = space.repeat((depth + 1) * spacesCount);
-
-    const result = node.map((item) => {
-      const { name, status, value } = item;
-      switch (status) {
-        case 'deleted':
-          return `${currentIndent}- ${name}: ${value}`;
-        case 'added':
-          return `${currentIndent}+ ${name}: ${value}`;
-        case 'nested':
-          return `${currentIndent}  ${name}: {\n${iter(value, depth + 2)}\n${bracketIndent}}`;
-        case 'modified':
-          return `${currentIndent}- ${name}: ${item.value1}\n${currentIndent}+ ${name}: ${item.value2}`;
-        case 'unchanged':
-          return `${currentIndent}  ${name}: ${value}`;
-        default:
-          throw new Error(`Unknown type: '${status}'`);
-      }
-    });
-
-    return result.join('\n');
-  };
-  return `{\n${iter(tree, 1)}\n}`;
-};
-
-export default (filepath1, filepath2) => {
+export default (filepath1, filepath2, format = 'stylish') => {
   const content1 = getFileContent(filepath1);
   const content2 = getFileContent(filepath2);
 
@@ -104,5 +76,5 @@ export default (filepath1, filepath2) => {
 
   const diff = findDiff(data1, data2);
 
-  return stylish(diff);
+  return formatDiff(diff, format);
 };

@@ -15,6 +15,6 @@ test('stylishJson', () => {
   expect(genDiff('file1.json', 'file2.json')).toEqual(stylishOutput);
 });
 
-// test('stylishYml', () => {
-//   expect(genDiff('file1.yml', 'file2.yml')).toEqual(stylishOutput);
-// });
+test('stylishYml', () => {
+  expect(genDiff('file1.yml', 'file2.yml')).toEqual(stylishOutput);
+});
