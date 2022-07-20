@@ -64,7 +64,7 @@ const findDiff = (obj1, obj2) => {
   return result;
 };
 
-export default (filepath1, filepath2, format) => {
+export default (filepath1, filepath2, format = 'stylish') => {
   const content1 = getFileContent(filepath1);
   const content2 = getFileContent(filepath2);
 
