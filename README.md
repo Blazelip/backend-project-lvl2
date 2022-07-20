@@ -1,31 +1,23 @@
-### Hexlet status:
+### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Blazelip/backend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/Blazelip/backend-project-lvl2/actions)
 
-### Tests & linter status:
-[![Tests and linter](https://github.com/Blazelip/backend-project-lvl2/workflows/tests-lint.yml/badge.svg)](https://github.com/Blazelip/backend-project-lvl2/actions)
+[![Tests and linter](https://github.com/Blazelip/backend-project-lvl2/actions/workflows/tests-lint.yml/badge.svg)](https://github.com/Blazelip/backend-project-lvl2/actions)
 
-### Maintainability:
 [![Maintainability](https://api.codeclimate.com/v1/badges/1ba2bd3409d1d18af39a/maintainability)](https://codeclimate.com/github/Blazelip/backend-project-lvl2/maintainability)
 
-### Test Coverage:
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1ba2bd3409d1d18af39a/test_coverage)](https://codeclimate.com/github/Blazelip/backend-project-lvl2/test_coverage)
 
-#### Initial
-[![asciicast](https://asciinema.org/a/LCSDAgcpsiX8Oq6f7cN3AJvli.svg)](https://asciinema.org/a/LCSDAgcpsiX8Oq6f7cN3AJvli)
+### Gen diff - console utility. You could get the difference between 2 files. Use `gendiff -h` for further information.
 
-#### Gendiff between 2 YML file
-[![asciicast](https://asciinema.org/a/ueB8UiQP4g1KtQuvnapyO3CI0.svg)](https://asciinema.org/a/ueB8UiQP4g1KtQuvnapyO3CI0)
+[![asciicast](https://asciinema.org/a/xhOyKYnCGkGrrDH8MwX1ksbRH.svg)](https://asciinema.org/a/xhOyKYnCGkGrrDH8MwX1ksbRH)
 
-#### Complicated Stylish gendiff 
+#### gendiff stylish formatter example
+[![asciicast](https://asciinema.org/a/bkFHEi2no2n0eNBSI8T5irjlL.svg)](https://asciinema.org/a/bkFHEi2no2n0eNBSI8T5irjlL)
 
-[![asciicast](https://asciinema.org/a/LCV4uBBXhX9pnyzjeJzVh7Vu4.svg)](https://asciinema.org/a/LCV4uBBXhX9pnyzjeJzVh7Vu4)
+#### gendiff plain formatter example
+[![asciicast](https://asciinema.org/a/cZFjzapg0um8EJic6D3z16jFq.svg)](https://asciinema.org/a/cZFjzapg0um8EJic6D3z16jFq)
 
-#### Complicated Plain gendiff
-
-[![asciicast](https://asciinema.org/a/x7enFWInfOwWKEJpkA1pJMXG7.svg)](https://asciinema.org/a/x7enFWInfOwWKEJpkA1pJMXG7)
-
-#### Complicated JSON gendiff
-
-[![asciicast](https://asciinema.org/a/If4ZBt1BZgeRIEMHOPAO43U2P.svg)](https://asciinema.org/a/If4ZBt1BZgeRIEMHOPAO43U2P)
+#### gendiff json formatter example
+[![asciicast](https://asciinema.org/a/BxYnXjYRMba6n7G3SyEXijkPQ.svg)](https://asciinema.org/a/BxYnXjYRMba6n7G3SyEXijkPQ)
 
 
