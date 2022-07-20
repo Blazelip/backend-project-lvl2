@@ -16,12 +16,16 @@
 #### Gendiff between 2 YML file
 [![asciicast](https://asciinema.org/a/ueB8UiQP4g1KtQuvnapyO3CI0.svg)](https://asciinema.org/a/ueB8UiQP4g1KtQuvnapyO3CI0)
 
-#### Complicated Stylish gendiff with nested objects
+#### Complicated Stylish gendiff 
 
 [![asciicast](https://asciinema.org/a/LCV4uBBXhX9pnyzjeJzVh7Vu4.svg)](https://asciinema.org/a/LCV4uBBXhX9pnyzjeJzVh7Vu4)
 
-#### Plain gendiff
+#### Complicated Plain gendiff
 
 [![asciicast](https://asciinema.org/a/x7enFWInfOwWKEJpkA1pJMXG7.svg)](https://asciinema.org/a/x7enFWInfOwWKEJpkA1pJMXG7)
+
+#### Complicated JSON gendiff
+
+[![asciicast](https://asciinema.org/a/If4ZBt1BZgeRIEMHOPAO43U2P.svg)](https://asciinema.org/a/If4ZBt1BZgeRIEMHOPAO43U2P)
 
 

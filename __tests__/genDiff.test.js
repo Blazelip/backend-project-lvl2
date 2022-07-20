@@ -11,6 +11,7 @@ const getFileContent = (filename) => readFileSync(getFixturePath(filename), 'utf
 
 const stylishOutput = getFileContent('stylishOutput.txt');
 const plainOutput = getFileContent('plainOutput.txt');
+const jsonOutput = getFileContent('jsonOutput.txt');
 
 test('stylishJson', () => {
   expect(genDiff('file1.json', 'file2.json', 'stylish')).toEqual(stylishOutput);
@@ -26,4 +27,12 @@ test('plainJson', () => {
 
 test('plainYml', () => {
   expect(genDiff('file1.yml', 'file2.yml', 'plain')).toEqual(plainOutput);
+});
+
+test('jsonJson', () => {
+  expect(genDiff('file1.json', 'file2.json', 'json')).toEqual(jsonOutput);
+});
+
+test('jsonYML', () => {
+  expect(genDiff('file1.yml', 'file2.yml', 'json')).toEqual(jsonOutput);
 });
