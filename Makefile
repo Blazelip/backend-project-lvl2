@@ -2,6 +2,7 @@
 
 install: # Выполняется установка зависимостей
 	npm ci
+	sudo npm link
 
 test:
 	npm test
