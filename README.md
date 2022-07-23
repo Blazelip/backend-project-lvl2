@@ -37,6 +37,7 @@ Options:
   -V, --version          output the version number
   -f, --format <type>    output format (choices: "stylish", "plain", "json", default: "stylish")
   -h, --help             display help for command
+```
 
 ## Project asciinemas:
 
