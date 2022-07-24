@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import parser from './parser.js';
-import findDiff from './formatters/findDiff.js';
+import findDiff from './findDiff.js';
 import formatDiff from './formatters/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
